@@ -1,5 +1,20 @@
 # Project Title: Subscription Service Analysis
 
+## Project Outline
+
+[Project Overview](#project-overview)
+
+[Data Source](#data-source)
+
+[Tools Used](#tools-used)
+
+[Visualization](#visualization)
+
+[Result/Findings](#result-findings)
+
+[Recommendation](#recommendation)
+
+[Conclusion](#conclusion)
 
 ## Project Overview
 This project involves analyzing customer data for a Subscription Servive to identify segments and trends. The aim is to understand customer behaviour, track subcription types and renewals.
