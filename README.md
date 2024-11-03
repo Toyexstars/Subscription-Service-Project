@@ -17,7 +17,7 @@ The primary data used is Capstone Dataset Customer data.CSV file. This is an ope
 - Using Excel function to calculate the average subscription duration.
   - Average Suscription Duration = AVERAGE( Table(SubcriptionEnd)-Table(SubscriptionStart))
 - Using Excel function to identify the most popular subscription types.
-  - 
+  - Most Popular subscrition type = COUNTIF(Table( Subscription type), D2)
 - Interesting reports using visualization
 
 
@@ -44,13 +44,15 @@ The primary data used is Capstone Dataset Customer data.CSV file. This is an ope
 ```
  - The average subscription duration for all customers
 ```SQL
-
-
+ SELECT AVG(DATEDIFF(subscriptionend,subscriptionstart)) AS Avg_Subscription_Duration 
+ FROM customersegmentation;
 
 ```
  - Customers with subscription longer than 12 months
 ```SQL
-
+ SELECT COUNT(*) AS Canceled_Subscription FROM customersegmentation
+ WHERE subscriptionend IS NOT NULL AND subscriptionstart IS NOT NULL
+ AND subscriptionend >= DATE_ADD(subscriptionstart, INTERVAL  12 MONTH);
 
 ```
  - Total revenue by subscription type
@@ -70,8 +72,11 @@ The primary data used is Capstone Dataset Customer data.CSV file. This is an ope
 ```
  - Total number of active and cancelled subcriptions
 ```SQL
- 
-
+ SELECT SUM(CASE WHEN canceled = false THEN 1
+        ELSE 0 END) AS Active_subscriptions,
+        SUM(CASE WHEN Canceled = true THEN 1
+        ELSE 0 END) AS Cancelled_subscription
+ FROM customersegmentation;
 ```
 
 ## Pivot Table
@@ -86,7 +91,8 @@ The Pivot table summarizes
 
 ## Excel Report
 
- <img width="609" alt="Excel Subscription Dashboard" src="https://github.com/user-attachments/assets/b6efd8bd-8f05-47ee-8b67-1f2ac6363da2">
+<img width="593" alt="Excel Subscription Analysis" src="https://github.com/user-attachments/assets/1c6badd4-8847-4054-89c5-5fc34489fb76">
+
 
 ## Key Performance Indicators
 - Total Customers: Count of customers that subscribe
